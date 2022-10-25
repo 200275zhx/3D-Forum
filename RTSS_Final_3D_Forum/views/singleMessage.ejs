@@ -1,0 +1,31 @@
+
+
+  <form method="POST" action="/remove">
+    <label for="message-<%=message._id%>" class="remove-label">+</label>
+    <input id="message-<%=message._id%>" class="remove-submit-btn" type="submit" name="removebutton" value="" />
+    <input type="hidden" name="messageId" value="<%=message._id%>" />
+  </form>
+
+  <form method="POST" action="/like" class="like-form">
+    <label for="like-message-<%=message._id%>" class="like-label">
+      Like <%= message.likes %>
+    </label>
+    <input id="like-message-<%=message._id%>" class="like-submit-btn" type="submit" name="like-btn" value="" />
+    <input type="hidden" name="messageId" value="<%=message._id%>" />
+  </form>
+
+
+  <div class="comments-container">
+    <% message.comments.forEach(function(comment) { %>
+      <div class="comment">
+        <%= comment.user %> said "<%= comment.text %>"
+      </div>
+      <% }) %>
+  </div>
+
+  <form method="POST" action="/comment" class="comment-form">
+    <input type="text" class="comments-input" name="theComment" placeholder="Add a comment..." />
+    <input type="hidden" name="messageId" value="<%=message._id%>" />
+  </form>
+
+

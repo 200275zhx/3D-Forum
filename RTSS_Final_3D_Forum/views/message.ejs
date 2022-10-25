@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.css">
+        <link rel="stylesheet" href="/style.css"/>
+    </head>
+  <body>
+
+    <div class="header">
+        <a href="/">
+            <div class="logo"></div>
+        </a>
+    </div>
+    
+    <div class="search-container">
+        <form method="GET" action="/search">
+            <input type="text" class="search-bar" name="searchTerm" placeholder="Search..." value=""/>
+            <div class="search-checkbox">
+                <input type="checkbox" class="search-bar-checkbox" name="imageOnly" id="imageOnlyCheckbox"/>
+                <label for="imageOnlyCheckbox">Only include search results with images</label>
+            </div>
+        </form>
+    </div>
+
+    <div class="items-container">
+        <%- include('singleMessage', { message: message }) %>
+    </div>
+
+  </body>
+</html>

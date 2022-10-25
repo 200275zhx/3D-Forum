@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.css">
+        <link rel="stylesheet" href="/style.css"/>
+        <link rel="stylesheet" href="/login.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    </head>
+
+    <script>
+      // This script adds a preview of the profile picture underneath the file picker dialog
+
+      $(document).ready(function() {
+        // We listen for the "change" event on the file input.
+        // This gets triggered when the user selects a new file.
+        $("#fileUpload").change(function() {
+          // Once we have a new file, we call the readURL function to parse that file and 
+          // set it as the source of our pre-defined <img> tag.
+          readURL(this)
+        })
+      })
+
+      function readURL(input) {
+          // Check if there are selected files
+          if (input.files && input.files[0]) {
+              // Parse the file using FileReader, and set the result as the "src" attribute
+              // of the image that has the pfpImage id.
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                  $('#pfpImage').attr('src', e.target.result);
+                  $('#pfpImage').css('display', 'block');
+              }
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+    </script>
+  <body>
+    
+    <div class="register-form-container">
+        <div class="title"> Registration Form </div>
+        <form method="POST" action="/signup" enctype="multipart/form-data">
+            <div class="register-content-container">
+                <div>
+                    <input type="text" name="fullName" placeholder="Your full name" class="login-full-name"/>
+                </div>            
+
+                <div>
+                  <input type="text" name="username" placeholder="Choose a username" class="login-username"/>
+                </div>            
+
+                <div>
+                    <input type="password" name="password" placeholder="Your password" class="login-password"/>
+                </div>
+
+                <div class="pfp-container">
+                    <label for="fileUpload" class="custom-file-upload">
+                        <i class="fa fa-camera-retro"></i> <span class="profile-picture-placeholder">Profile Picture</span>
+                    </label>
+                    <input id="fileUpload" name="profilePicture" type="file"/>
+                    <div class="image-preview">
+                      <img id="pfpImage" src="#" class="pfp-image"/>
+                    </div>
+                </div>            
+
+                <div class="submit-container">
+                    <input type="submit" class="login_logout-button" name="submitbutton" value="Register" />
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+
+  </body>
+</html>

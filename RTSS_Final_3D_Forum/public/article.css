@@ -1,0 +1,49 @@
+.content {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.article-title {
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.article-summary {
+    text-align: left;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.article-image {
+    height: auto;
+    width: 1275px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    margin: 20 0 20 0px;
+} 
+
+.article-text {    
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.navigation {
+    margin-top: 20px;
+    text-decoration: underline;
+}
+
+.go-back {
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-size: 16pt;
+    font-family: monospace;
+}
+
+textarea {
+    outline: none;
+}

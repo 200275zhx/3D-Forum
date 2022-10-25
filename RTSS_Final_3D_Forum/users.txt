@@ -1,0 +1,1 @@
+{"username":"Zed","fullname":"Cooper","password":"$2b$10$Gmoc7Q6tQAAN90j5VNLLq.BAFWgQ8nU4fr3umlY/QViytEn9G/YTO","profilePicture":"/uploads/745d51b0e4356d83dc6c7112a135f15d","_id":"QNSzp9UReVHjPYvc"}

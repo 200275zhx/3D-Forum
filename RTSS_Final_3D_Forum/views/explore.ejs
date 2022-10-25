@@ -1,0 +1,201 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+  <script type="text/javascript" src="simplepeer.min.js"></script>
+  <script type="text/javascript" src="socket.io.js"></script>
+  <script src="p5.js"></script>
+  <script src="p5.sound.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="p5livemedia.js"></script>
+</head>
+
+<script>
+  $(document).ready(function () {
+    var visits = Cookies.get('visits')
+
+    console.log('Visits cookie is: ', visits)
+    $('#visitsCounterFrontend').html("Frontend says you've visited this page " + visits + " times.")
+  })
+</script>
+
+<body>
+
+  <div class="navbar">
+    <ul>
+      <li>
+        <a class="active" href="/">Explore</a>
+      </li>
+      <li>
+        <a href="/myPost">My Post</a>
+      </li>
+      <li class="align-to-right">
+        <a href="/logout">Logout</a>
+      </li>
+
+    </ul>
+  </div>
+
+  <script src="sketch.js"></script>
+  <script src="players.js"></script>
+  <script src="scene.js"></script>
+  <script src="sceneModule.js"></script>
+  <script src="scene_collision.js"></script>
+  <script src="avatar_control.js"></script>
+
+  <div class="body-content">
+
+    <div class="big-container">
+      <!-- Header -->
+      <div class="header">
+        <h1> Topic of the exhibition: Say something... </h1>
+        <div class="subtitle"> This is a virtual exhibition room where you can exhibit your comments on the wall.
+        </div>
+      </div>
+      <!-- End of header -->
+
+      <!-- action="/uploads" method="POST" enctype="multipart/form-data" -->
+
+      <form action="/uploads" method="POST" enctype="multipart/form-data">
+        <div class="commentSubmit">
+          <textarea id="comment" value="" rows="10" cols="45" name="inputText" style="resize: none;"></textarea>
+          <button onclick="submitComment()" class="submit-button">Submit</button>
+          <!-- <input type="submit" name="submitbutton" value="Publish" onclick="submitComment()"/> -->
+        </div>
+      </form>
+
+      <div class="rule-intro"> 
+        This is a virtual environment with real time streaming media. <br>
+        Use "w, s, a, d" to move, <br>
+        Mouse move within the canvas can pan or tilt perspective, <br>
+        Mouse drag across the canvas can move mouse position without affecting perspective, <br>
+        Submit a comment by entering text in the textarea and hit submit. <br>
+      </div>
+
+      <!-- <script>
+        function SubForm() {
+          $.ajax({
+            url: '/uploads',
+            type: 'POST',
+            cache: false,
+            contentType: false,
+            processData: false,
+            method: 'POST',
+            data: $('#comment').serialize(),
+            success: function () {
+              alert("worked");
+            }
+          });
+        }
+      </script> -->
+
+      <!-- <script>
+        function pd(event) {
+          event.preventDefault();
+        }
+      </script> -->
+
+      <div class="canvasBackground"></div>
+      <div class="moduleBreak"></div>
+      <div class="moduleBreakLine"></div>
+
+
+      <div class="header">
+        <h1> Record Board </h1>
+        <div class="subtitle"> This is a 2D version of the exhibition.
+        </div>
+      </div>
+      <!-- End of header -->
+
+      <!-- Articles -->
+      <div class="content">
+
+        <!-- Featured article -->
+
+        <div class="comments-container">
+          <% messages.forEach(function(message, index) { %>
+            <div class="feature-container-explore">
+              <div class="comment" name=“array”>
+                <p class="explore-comments-history">
+                  <%-  message.inputText %>
+                </p>
+                <small class="explore-publisher">
+                  ------ <%= message.author %>
+                </small>
+                <small class="article-date-explore">
+                  <%= message.date %>
+                </small>
+                <% console.log('12', message.inputText)%>
+                  <!-- <script>
+        console.log(message.inputText);
+      </script> -->
+
+                  <form method="POST" action="/like" class="like-form-submit">
+                    <label for="like-message-<%=message._id%>" id="like-label-<%=message._id%>" class="like-label-explore">
+                      Like <%= message.likes %>
+                    </label>
+                    <input id="like-message-<%=message._id%>" class="like-submit-btn" type="submit" name="like-btn"
+                      value="" onclick="likePlus()" />
+                    <input type="hidden" name="messageId" value="<%=message._id%>" />
+                  </form>
+                  <script>
+                    function likePlus() {
+                      document.getElementsById("like-label-<%=message._id%>").innerHTML = "Like <%= message.likes + 1 %>";
+                    }
+                  </script>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+
+      </div>
+
+
+
+
+      <!-- Footer -->
+      <div class="footer">
+        <h2 class="footer-title">Multi-Dim Forum</h2>
+
+        <div class="footer-menu">
+          <div class="stats">
+            <em>Server Stats</em> <br />
+            Location: New York <br />
+            <span class="extra-credit">Currently Under Development</span><br />
+          </div>
+
+          <div class="forecast">
+            <em>Credit</em> <br />
+            <span class="extra-credit">Code Reference: RTSS & Networked Media</span> <br />
+            <span class="extra-credit">Library: p5 live media</span> <br />
+          </div>
+
+          <div class="info">
+            <em>Info</em> <br />
+            About the site <br />
+            Power <br />
+            Colophon <br />
+            Donate <br />
+            Privacy Policy <br />
+          </div>
+
+          <div class="contact">
+            <em>Contact</em> <br />
+            © Hershey Zhang <br />
+          </div>
+        </div>
+
+        <div class="page-size">
+          <small class="extra-credit">Page size: 636KB</small>
+        </div>
+      </div>
+      <!-- End of footer -->
+
+    </div>
+  </div>
+</body>
+
+</html>

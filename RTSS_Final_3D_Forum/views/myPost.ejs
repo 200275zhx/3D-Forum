@@ -1,0 +1,136 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+</head>
+
+<script>
+  $(document).ready(function () {
+    var visits = Cookies.get('visits')
+
+    console.log('Visits cookie is: ', visits)
+    $('#visitsCounterFrontend').html("Frontend says you've visited this page " + visits + " times.")
+  })
+</script>
+
+<body>
+
+  <div class="navbar">
+    <ul>
+      <li>
+        <a href="/">Explore</a>
+      </li>  
+      <li>
+        <a class="active" href="/myPost">My Post</a>
+      </li>
+      <li class="align-to-right">
+        <a href="/logout">Logout</a>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="body-content">
+
+  <div class="big-container">
+    <!-- Header -->
+    <div class="header">
+      <div class="profile-image-container">
+        <img class="profile-image" src=" <%= profile.profilePicture %> "/>
+      </div>
+      <h1> Multi-Dim Forum </h1>
+      <div class="subtitle"> This is the collection of all the comments you posted, you can remove your posts here. </div>
+    </div>
+    <!-- End of header -->
+
+    <!-- Articles -->
+    <div class="content">
+
+      <!-- Featured article -->
+      <% messages.forEach(function(message, index) { %>
+        <% if (message.author==publisher) { %>
+
+            <div class="feature-container">
+
+              <div class="text">
+                <p class="article-summary-myPost">
+                  <%- message.inputText.replaceAll('\r\n', '<br>' ) %>
+                </p>
+                <small class="article-date">
+                  <%= message.date %>
+                </small>
+
+                <p id="publisher" name="publisher" class="mypost-publisher">
+                  author: <%= message.author %>
+                </p>
+              </div>
+
+              <div class="like-form">
+              <label for="like-message-<%=message._id%>" class="like-label">
+                Like <%= message.likes %>
+              </label>
+            </div>
+
+                <form method="POST" action="/removeMyPost">
+                  <label for="message-<%=message._id%>" class="remove-label">+</label>
+                  <input id="message-<%=message._id%>" class="remove-submit-btn" type="submit" name="removebutton"
+                    value="" />
+                  <input type="hidden" name="messageId" value="<%=message._id%>" />
+                </form>
+
+            </div>
+          </a>
+          
+          <% } %>
+            <% }) %>
+
+              <!-- End of featured article -->
+
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <h2 class="footer-title">Multi-Dim Forum</h2>
+
+      <div class="footer-menu">
+        <div class="stats">
+          <em>Server Stats</em> <br />
+          Location: New York <br />
+          <span class="extra-credit">Currently Under Development</span><br />
+        </div>
+
+        <div class="forecast">
+          <em>Credit</em> <br />
+          <span class="extra-credit">Code Reference: RTSS & Networked Media</span> <br />
+          <span class="extra-credit">Library: p5 live media</span> <br />
+        </div>
+
+        <div class="info">
+          <em>Info</em> <br />
+          About the site <br />
+          Power <br />
+          Colophon <br />
+          Donate <br />
+          Privacy Policy <br />
+        </div>
+
+        <div class="contact">
+          <em>Contact</em> <br />
+          © Hershey Zhang <br />
+        </div>
+      </div>
+
+      <div class="page-size">
+        <small class="extra-credit">Page size: 636KB</small>
+      </div>
+    </div>
+    <!-- End of footer -->
+
+  </div>
+</div>
+</body>
+
+</html>

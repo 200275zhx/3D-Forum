@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.css">
+        <link rel="stylesheet" href="/style.css"/>
+        <link rel="stylesheet" href="/login.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    </head>
+  <body> 
+    
+    <div class="form-container" id="login-form-container">
+        <% if (error) { %>
+          <h3 class="error-message"> You need to be authenticated in order to access this page. </h3>
+          <script>
+            $('#login-form-container').addClass('error-container')
+          </script>
+        <% } %>
+        <div class="title"> Multi-Dim Forum </div>
+        <form method="POST" action="/authenticate">
+            <div class="register-content-container">
+                <div>
+                  <input type="text" name="username" placeholder="Username" class="login-username"/>
+                </div>            
+
+                <div>
+                    <input type="password" name="password" placeholder="Password" class="login-password"/>
+                </div>
+
+                <div class="submit-container">
+                    <input type="submit" class="login_logout-button" name="submitbutton" value="Log In" />
+                </div>
+            </div>
+        </form>
+        <div class="separater">------------------------------------------</div>
+        <div class="link-to-register">
+          <div class="login-to-register">Don't have an account? Register <a href="/register" class="link">here</a>.</div>
+        </div>
+    </div>
+
+  </body>
+</html>

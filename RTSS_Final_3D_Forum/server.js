@@ -9,6 +9,13 @@ const nedbSessionStore = require('nedb-session-store')
 const bcrypt = require('bcrypt')
 const middlewares = require('./middlewares')
 const axios = require('axios')
+const https = require("https");
+const fs = require("fs");
+
+const options = {
+  key: fs.readFileSync("key.pem"),
+  cert: fs.readFileSync("cert.pem"),
+};
 
 const requireAuthenticated = middlewares.requireAuthenticated
 const requireNotAuthenticated = middlewares.requireNotAuthenticated
@@ -288,6 +295,11 @@ app.get('/test', function(request, response) {
   response.send('Server is working')
 })
 
-app.listen(5919, function() {
-  console.log('Server started on port 5919')
-})
+// app.listen(8080, function() {
+//   console.log('Server started on port 8080')
+// })
+
+const PORT = process.env.PORT || 443;
+https
+  .createServer(options, app)
+  .listen(PORT, console.log(`server runs on port ${PORT}`));
